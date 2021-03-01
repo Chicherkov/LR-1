@@ -1,0 +1,102 @@
+#include <iostream>
+#include <string>
+
+class Date {
+public:
+    Date(int d = 0, int m = 0, int y = 0) {
+        setDate(d, m, y);
+    }
+
+    Date(const Date& date) {
+        setDate(date.day, date.month, date.year);
+    }
+
+    int getDay() const {
+        return day;
+    }
+
+    int getMonth() const {
+        return month;
+    }
+
+    int getYear() const {
+        return year;
+    }
+
+    void setDay(int day) {
+        this->day = day;
+    }
+
+    void setMonth(int month) {
+        this->month = month;
+    }
+
+    void setYear(int year) {
+        this->year = year;
+    }
+
+    void setDate(int day, int month, int year) {
+        if (isValidDate(day, month, year)) {
+            setDay(day);
+            setMonth(month);
+            setYear(year);
+        }
+        else {
+            throw std::string("Not valid date");
+        }
+    }
+
+    void print() const {
+        std::cout << day << '/'
+            << month << '/'
+            << year << std::endl;
+    }
+
+    static bool isValidDate(int day, int month, int year) {
+
+        bool isDay(int day);
+        {
+            if (day >= 1 && day <= 31)
+                return true;
+            return false;
+        }
+
+        bool isMonth(int month);
+        {
+            if (month >= 1 && month <= 12)
+                return true;
+            return false;
+        }
+
+
+    }
+
+    static bool isLeapYear(int year) {
+
+        return  (year > 1582 && year % 4 == 0 && (year % 100 == 0 && year % 400 != 0));
+    }
+
+private:
+    int day;
+    int month;
+    int year;
+};
+
+int main() {
+    Date d1(01, 03, 2021);
+    d1.print();
+
+    Date d2 = d1;
+    d2.setDay(2);
+    d2.print();
+
+    Date d3 = d2;
+    d3.setMonth(12);
+    d3.print();
+
+    Date d4 = d3;
+    d4.setYear(2022);
+    d4.print();
+
+    return 0;
+}
